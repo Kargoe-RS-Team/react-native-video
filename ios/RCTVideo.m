@@ -611,7 +611,13 @@ static NSString *const timedMetadata = @"timedMetadata";
 - (void)setMuted:(BOOL)muted
 {
   _muted = muted;
-  [self applyModifiers];
+ if (_muted) {
+    [_player setVolume:0];
+    [_player setMuted:YES];
+  } else {
+    [_player setVolume:_volume];
+    [_player setMuted:NO];
+  }
 }
 
 - (void)setVolume:(float)volume
