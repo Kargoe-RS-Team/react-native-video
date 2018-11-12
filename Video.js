@@ -94,6 +94,9 @@ export default class Video extends Component {
   };
 
   _onProgress = (event) => {
+    if (this.state.showPoster) {
+      this.setState({showPoster: false});
+    }
     if (this.props.onProgress) {
       this.props.onProgress(event.nativeEvent);
     }

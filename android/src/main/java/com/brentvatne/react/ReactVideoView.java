@@ -205,9 +205,20 @@ public class ReactVideoView extends ScalableVideoView implements MediaPlayer.OnP
             mediaController.hide();
         }
         if ( mMediaPlayer != null ) {
+           
+        }
+        if(mMediaPlayer != null){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                mMediaPlayer.setOnTimedMetaDataAvailableListener(null);
+            }
             mMediaPlayerValid = false;
             release();
         }
+        if(mThemedReactContext != null){
+            mThemedReactContext.removeLifecycleEventListener(this);
+            mThemedReactContext = null;
+        }
+      
     }
 
     public void setSrc(final String uriString, final String type, final boolean isNetwork, final boolean isAsset, final ReadableMap requestHeaders) {
